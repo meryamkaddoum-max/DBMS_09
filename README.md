@@ -50,6 +50,7 @@ Open that URL in your browser before writing a single line of code — the Swagg
 > **Screenshot 1:** Take a screenshot of the Swagger UI showing the list of available endpoints.
 >
 > `[insert screenshot]`
+<img width="2874" height="1080" alt="image" src="https://github.com/user-attachments/assets/b53b62b6-44ff-44e4-8b62-58fb86c83269" />
 
 ---
 
@@ -103,6 +104,7 @@ python3 --version
 > **Screenshot 2:** Take a screenshot showing the version outputs of `uv` and `python3`.
 >
 > `[insert screenshot]`
+<img width="574" height="215" alt="Screenshot 2026-07-08 at 12 32 13 pm" src="https://github.com/user-attachments/assets/29147e99-cb9c-4151-8b49-71558d733ddb" />
 
 ---
 
@@ -162,6 +164,7 @@ uv run python -c "import requests; print('requests', requests.__version__)"
 > **Screenshot 3:** Take a screenshot showing the output confirming `requests` is available.
 >
 > `[insert screenshot]`
+<img width="587" height="70" alt="Screenshot 2026-07-08 at 12 41 39 pm" src="https://github.com/user-attachments/assets/c1611ddc-90c0-4c1e-a151-328555299f3a" />
 
 ### Step 5 – Commit
 
