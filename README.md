@@ -179,10 +179,14 @@ git push -u origin main
 **Question 1.1:** `uv` creates a `uv.lock` file alongside `pyproject.toml`. What is the difference between the two files? Why should `uv.lock` be committed to version control?
 
 > *Your answer:*
+pyproject.toml defines the project's metadata and dependency requirements, while uv.lock records the exact versions of all installed dependencies. Committing uv.lock ensures that every developer and deployment uses the same dependency versions, resulting in reproducible builds.
 
 **Question 1.2:** `uv run` executes a command inside the project's virtual environment without you having to activate it manually. What problem does this solve compared to relying on the system-wide Python installation?
 
+
 > *Your answer:*
+uv run ensures that the command uses the project's isolated virtual environment and the correct dependency versions. This avoids conflicts with system-wide Python packages and makes the project more reliable and reproducible.
+
 
 ---
 
@@ -291,11 +295,12 @@ git push
 **Question 2.1:** `r.raise_for_status()` raises an exception if the server returned a 4xx or 5xx status code. What would happen if this call were omitted and the server returned `409 Conflict`?
 
 > *Your answer:*
+Without raise_for_status(), no exception would be raised for the 409 Conflict response. The program could continue as if the request was successful, which may lead to incorrect behavior or errors when processing the response.
 
 **Question 2.2:** `BASE_URL` and `HEADERS` are module-level variables set at runtime by the connection dialog. Why is this approach preferable to reading them from a configuration file on disk?
 
 > *Your answer:*
-
+This approach keeps the API URL and API key configurable at runtime without storing sensitive information on disk. It improves security, allows easy connection to different servers, and avoids exposing credentials in configuration files.
 ---
 
 ## 3 – Connection Dialog
@@ -734,11 +739,12 @@ git push
 **Question 4.1:** The `_refresh_all()` method is called in `__init__` and makes three HTTP requests before `mainloop()` starts. In what scenario could this block the UI from appearing? How would you fix it?
 
 > *Your answer:*
+> If the API server is slow, unreachable, or the network connection is delayed, the HTTP requests may block before mainloop() starts, preventing the GUI from appearing. A better solution is to start the GUI first and perform the HTTP requests in a background thread or schedule them with after() so the interface remains responsive.
 
 **Question 4.2:** When `api.post_produktion()` raises an exception (e.g. `409 Conflict` due to insufficient parts), `messagebox.showerror` displays the error to the user. Look at the `requests` library documentation: what type of exception does `raise_for_status()` raise, and what attribute contains the server's response body?
 
 > *Your answer:*
-
+raise_for_status() raises a requests.exceptions.HTTPError. The server response is available through the exception's response attribute (for example, e.response.text or e.response.json()).
 ---
 
 ## 5 – Walk Through All Endpoints
@@ -1079,13 +1085,13 @@ I would use an APT repository together with tools such as reprepro or aptly. Thi
 `api.py` contains all HTTP logic; `ui.py` contains all widget code; `__main__.py` wires them together. Name one concrete benefit this separation provides when you want to write automated tests for the API client.
 
 > *Your answer:*
-I would use an APT repository together with tools such as reprepro or aptly. This allows Debian and Ubuntu systems to receive updates automatically through the standard apt update and apt upgrade mechanism.
+The API client can be tested independently from the graphical user interface by mocking HTTP requests, making automated testing easier and faster.
 
 **Question B – Event-Driven vs Sequential:**  
 A fellow student proposes using a `while True` loop in the main thread to poll the API every 5 seconds and update the display. Explain why this approach would break the tkinter application, and describe the correct alternative.
 
 > *Your answer:*
-The API client can be tested independently from the graphical user interface by mocking HTTP requests, making automated testing easier and faster.
+A while True loop in the main thread blocks tkinter's event loop, causing the GUI to freeze. The correct approach is to use tkinter's after() method or a background thread to perform periodic updates without blocking the interface.
 
 **Question C – API Key in the Dialog:**  
 The connection dialog collects the API key at runtime and stores it in `api.HEADERS` for the session only. It is never written to disk. What are the security advantages of this approach compared to storing the key in a configuration file in the user's home directory?
