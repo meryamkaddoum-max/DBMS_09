@@ -273,6 +273,7 @@ for p in parts:
 > **Screenshot 4:** Take a screenshot showing the parts list printed in the Python REPL.
 >
 > `[insert screenshot]`
+> <img width="393" height="197" alt="Screenshot 2026-07-15 at 5 17 55 pm" src="https://github.com/user-attachments/assets/fbfd0f45-f7d6-4fba-af71-e1b67df49832" />
 
 Exit with `exit()`.
 
@@ -283,6 +284,7 @@ git add src/fabrik_frontend/api.py
 git commit -m "feat: add API client layer for all endpoints"
 git push
 ```
+
 
 ### Questions for Section 2
 
