@@ -382,7 +382,7 @@ root.mainloop()
 > Describe the difference.
 
 > *Your answer:*
-
+Without grab_set(), the dialog is non-modal and the user can still interact with the main window. With grab_set(), the dialog becomes modal and the main window should not accept user input until the dialog is closed.
 ### Step 3 – Commit
 
 ```bash
@@ -714,10 +714,12 @@ The connection dialog should appear. Enter the base URL (`http://128.140.85.215:
 > **Screenshot 5:** Take a screenshot of the connection dialog.
 >
 > `[insert screenshot]`
+<img width="974" height="340" alt="image" src="https://github.com/user-attachments/assets/fef36151-0ea5-4e6e-b2e0-6548880a7e6d" />
 
 > **Screenshot 6:** Take a screenshot of the main window showing the Parts tab populated with data from the live server.
 >
 > `[insert screenshot]`
+<img width="1662" height="1362" alt="image" src="https://github.com/user-attachments/assets/84bc76f6-6bb4-41ac-95f9-d4ba82e86b5c" />
 
 ### Step 4 – Commit
 
@@ -753,6 +755,7 @@ In the **Parts** tab, use the *Deliver parts* form:
 > **Screenshot 7:** Parts tab after delivering, showing updated stock values.
 >
 > `[insert screenshot]`
+<img width="805" height="661" alt="Screenshot 2026-07-15 at 6 11 21 pm" src="https://github.com/user-attachments/assets/462e3da2-d5f8-4392-a682-310ad99f2f82" />
 
 ### Step 2 – Record a Production Run
 
@@ -765,6 +768,7 @@ In the **Products** tab, use the *Record production run* form:
 > **Screenshot 8:** Parts tab after production, showing reduced stock.
 >
 > `[insert screenshot]`
+<img width="754" height="214" alt="Screenshot 2026-07-15 at 6 15 19 pm" src="https://github.com/user-attachments/assets/1f33f687-6c93-4d97-bf1c-f5bf34dde23d" />
 
 ### Step 3 – Check the Bill of Materials
 
@@ -773,6 +777,7 @@ Switch to the **Bill of Materials** tab. Enter Product ID `2` (Racing bike frame
 > **Screenshot 9:** Bill of Materials tab showing all five parts for the racing bike frame.
 >
 > `[insert screenshot]`
+<img width="814" height="348" alt="Screenshot 2026-07-15 at 6 15 49 pm" src="https://github.com/user-attachments/assets/00466a69-12f9-4f1f-a7ee-d3b9c8bd6e59" />
 
 ### Step 4 – Check Out a Finished Product
 
@@ -783,6 +788,7 @@ In the **Products** tab, use the *Check out from warehouse* form:
 > **Screenshot 10:** Products tab after checkout, showing `Total out` incremented by 1.
 >
 > `[insert screenshot]`
+<img width="779" height="256" alt="Screenshot 2026-07-15 at 6 16 44 pm" src="https://github.com/user-attachments/assets/4960c6d1-fc92-4ade-897d-13a947e2b41f" />
 
 ### Step 5 – Trigger a Reorder Warning
 
@@ -791,6 +797,7 @@ Deliver only 1 steel tube (Part ID `1`) to bring stock very low, then produce 1 
 > **Screenshot 11:** Reorder Warnings tab showing at least one warning entry.
 >
 > `[insert screenshot]`
+<img width="766" height="174" alt="Screenshot 2026-07-15 at 6 22 15 pm" src="https://github.com/user-attachments/assets/7da0bb4b-d5e2-40e3-8a19-d025a6d85134" />
 
 ### Step 6 – Stocktake Correction
 
@@ -851,6 +858,8 @@ fabrik-frontend
 >
 > `[insert screenshot]`
 
+<img width="612" height="101" alt="Screenshot 2026-07-15 at 6 30 35 pm" src="https://github.com/user-attachments/assets/52cf4a00-8020-4d6a-bb9b-03b17ca3f636" />
+
 ### Step 2 – Commit
 
 ```bash
@@ -866,11 +875,12 @@ git push
 **Question 6.1:** A `.whl` file still requires Python to be installed on the target machine. What problem does PyInstaller solve that `uv build` does not?
 
 > *Your answer:*
+A wheel package requires a compatible Python installation on the target machine. PyInstaller bundles the Python interpreter, all required libraries, and the application into a standalone executable, so the user does not need Python installed.
 
 **Question 6.2:** `[project.scripts]` defines `fabrik-frontend = "fabrik_frontend.__main__:main"`. Explain what happens when a user runs the command `fabrik-frontend` in their terminal after installing the wheel.
 
 > *Your answer:*
-
+After the wheel is installed, Python creates a command named fabrik-frontend. Running this command executes the main() function in fabrik_frontend.__main__, which starts the application.
 ---
 
 ## 7 – Standalone Executable with PyInstaller
@@ -921,6 +931,7 @@ On Windows: `fabrik-frontend.exe` instead.
 > **Screenshot 13:** The application running from the PyInstaller-built executable.
 >
 > `[insert screenshot]`
+<img width="1440" height="184" alt="Screenshot 2026-07-15 at 6 39 16 pm" src="https://github.com/user-attachments/assets/03bfeffb-edf7-4380-8548-e71afe208158" />
 
 > **Note:** PyInstaller builds are platform-specific. A build on Linux produces a Linux binary only. To distribute for all three platforms you need to build once on each operating system (or use a CI/CD pipeline).
 
@@ -1035,6 +1046,7 @@ The `.dmg` opens as a drag-and-drop window: the user drags `fabrik-frontend.app`
 > **Screenshot 16 (macOS only):** The `.dmg` drag-and-drop window.
 >
 > `[insert screenshot]`
+<img width="1150" height="714" alt="image" src="https://github.com/user-attachments/assets/a7b729ea-3990-42ba-8f7d-58e16d60c303" />
 
 ---
 
@@ -1052,10 +1064,12 @@ git push
 **Question 8.1:** PyInstaller bundles a complete Python interpreter into `_internal/`. What is the typical size of a PyInstaller `--onedir` output compared to a minimal Python installation, and why is `--onedir` generally preferred over `--onefile` for desktop applications?
 
 > *Your answer:*
+A PyInstaller --onedir build is typically around 40–100 MB, depending on the application and included libraries. It is generally preferred because it starts faster, avoids extracting files to a temporary directory at every launch, and simplifies debugging.
 
 **Question 8.2:** A `.deb` package installed via `dpkg -i` does not appear in the system package manager's update mechanism. Which tool and repository format would you use to distribute updates automatically to Debian/Ubuntu users?
 
 > *Your answer:*
+I would use an APT repository together with tools such as reprepro or aptly. This allows Debian and Ubuntu systems to receive updates automatically through the standard apt update and apt upgrade mechanism.
 
 ---
 
@@ -1065,22 +1079,25 @@ git push
 `api.py` contains all HTTP logic; `ui.py` contains all widget code; `__main__.py` wires them together. Name one concrete benefit this separation provides when you want to write automated tests for the API client.
 
 > *Your answer:*
+I would use an APT repository together with tools such as reprepro or aptly. This allows Debian and Ubuntu systems to receive updates automatically through the standard apt update and apt upgrade mechanism.
 
 **Question B – Event-Driven vs Sequential:**  
 A fellow student proposes using a `while True` loop in the main thread to poll the API every 5 seconds and update the display. Explain why this approach would break the tkinter application, and describe the correct alternative.
 
 > *Your answer:*
+The API client can be tested independently from the graphical user interface by mocking HTTP requests, making automated testing easier and faster.
 
 **Question C – API Key in the Dialog:**  
 The connection dialog collects the API key at runtime and stores it in `api.HEADERS` for the session only. It is never written to disk. What are the security advantages of this approach compared to storing the key in a configuration file in the user's home directory?
 
 > *Your answer:*
+Keeping the API key only in memory reduces the risk of exposing sensitive credentials through configuration files, backups, or accidental commits to version control.
 
 **Question D – The Full Stack:**  
 You have now touched every layer of the system: PostgreSQL database → Docker Compose deployment → FastAPI REST layer → tkinter desktop client → native installer. Describe in one sentence the role of each layer, and explain which layer a new employee would need to understand to add a sixth part to the bill of materials without changing any other layer.
 
 > *Your answer:*
-
+PostgreSQL stores the application data, Docker Compose deploys the services, FastAPI provides the REST API, the tkinter client offers the graphical interface, and the native installer packages the application for end users. To add a sixth part to the bill of materials without changing any other layer, only the PostgreSQL database data needs to be updated.
 ---
 
 ## Further Reading
